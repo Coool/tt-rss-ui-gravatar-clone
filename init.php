@@ -15,7 +15,7 @@ class UI_Gravatar extends Plugin {
 		$this->host = $host;
 
 		$sth = $this->pdo->prepare("SELECT email FROM ttrss_users WHERE id = ?");
-		$sth->execute([$_SESSION['uid']]);
+		$sth->execute([($_SESSION['uid'] ?? 0)]);
 
 		if ($row = $sth->fetch()) {
 			$this->gravatar_hash = md5(trim($row['email']));
